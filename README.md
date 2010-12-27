@@ -4,46 +4,8 @@ Immanix
 A Java library for processing (large) xml files using parser combinators-like approach.
 Please see below for a more detailed explanation on how to use Immanix.
 
-Building
---------
-
-You need a Java 5 (or newer) environment and Maven 3 installed:
-
-    $ mvn --version
-
-    Apache Maven 2.2.1 (r801777; 2009-08-06 20:16:01+0100)
-    Java version: 1.6.0_20
-    Java home: /usr/lib/jvm/java-6-openjdk/jre
-    Default locale: en_US, platform encoding: UTF-8
-    OS name: "linux" version: "2.6.35-24-generic" arch: "amd64" Family: "unix"
-
-You should now be able to do a full build of `ojaas`:
-
-    $ git clone git://github.com/jawher/immanix.git
-    $ cd immanix
-    $ mvn clean install
-
-To use this library in your projects, add the following to the `dependencies` section of your
-`pom.xml`:
-
-    <dependency>
-      <groupId>jawher</groupId>
-      <artifactId>immanix</artifactId>
-      <version>0.9-SNAPSHOT</version>
-    </dependency>
-
-Troubleshooting
----------------
-
-Please consider using [Github issues tracker](http://github.com/jawher/immanix/issues) to submit bug reports or feature requests.
-
-
 Using this library
 ------------------
-
-I've compiled [some simple and elemetary use cases in this gist](http://gist.github.com/522028), and [some more complex and advanced use cases in this gist](http://gist.github.com/522037).
-
-Here's a quick sample of how `moulder` can be used to manipulate html:
 
 Given an xml file that looks like the following:
 
@@ -193,3 +155,36 @@ License
 -------
 
 See `LICENSE` for details.
+
+Building
+--------
+
+You need a Java 5 (or newer) environment and Maven 3 installed:
+
+    $ mvn --version
+
+    Apache Maven 2.2.1 (r801777; 2009-08-06 20:16:01+0100)
+    Java version: 1.6.0_20
+    Java home: /usr/lib/jvm/java-6-openjdk/jre
+    Default locale: en_US, platform encoding: UTF-8
+    OS name: "linux" version: "2.6.35-24-generic" arch: "amd64" Family: "unix"
+
+You should now be able to do a full build of `ojaas`:
+
+    $ git clone git://github.com/jawher/immanix.git
+    $ cd immanix
+    $ mvn clean install
+
+To use this library in your projects, add the following to the `dependencies` section of your
+`pom.xml`:
+
+    <dependency>
+      <groupId>jawher</groupId>
+      <artifactId>immanix</artifactId>
+      <version>0.9-SNAPSHOT</version>
+    </dependency>
+
+Troubleshooting
+---------------
+
+Please consider using [Github issues tracker](http://github.com/jawher/immanix/issues) to submit bug reports or feature requests.
