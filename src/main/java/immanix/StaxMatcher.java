@@ -103,7 +103,7 @@ public abstract class StaxMatcher<T> {
 
             @Override
             public String toString() {
-                return "["+StaxMatcher.this+"]";
+                return "[" + StaxMatcher.this + "]";
             }
         };
     }
@@ -121,11 +121,18 @@ public abstract class StaxMatcher<T> {
 
             @Override
             public String toString() {
-                return StaxMatcher.this+"";
+                return StaxMatcher.this + "";
             }
         };
+    }
 
-
+    public StaxMatcher<T> cond(final Function1<T, Boolean> predicate) {
+        return new CondMatcher<T>(this) {
+            @Override
+            public boolean validate(T data) {
+                return predicate.apply(data);
+            }
+        };
     }
 
 }

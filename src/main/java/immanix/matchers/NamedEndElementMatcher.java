@@ -1,30 +1,32 @@
 package immanix.matchers;
 
 import javax.xml.stream.events.EndElement;
+import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-public class NamedEndElementMatcher extends BaseEventMatcher<EndElement> {
+/**
+ * A matcher that only succeeds if it matches an end element event with the specified name
+ */
+public class NamedEndElementMatcher extends CondMatcher<EndElement> {
     private final String name;
 
+    /**
+     * @param name the end element's name to match
+     */
     public NamedEndElementMatcher(String name) {
-        super();
+        super(new EndElementMatcher());
         this.name = name;
     }
 
 
     @Override
-    protected boolean accept(XMLEvent e) {
-        return e.isEndElement() && name.equals(e.asEndElement().getName().getLocalPart());
-    }
-
-    @Override
-    protected EndElement process(XMLEvent e) {
-        return e.asEndElement();
+    public boolean validate(EndElement data) {
+        return name.equals(data.asEndElement().getName().getLocalPart());
     }
 
     @Override
     public String toString() {
-        return "</"+name+">";
+        return "</" + name + ">";
     }
 
 }
