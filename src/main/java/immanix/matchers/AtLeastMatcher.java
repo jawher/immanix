@@ -10,6 +10,13 @@ import javax.xml.stream.events.XMLEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A matcher that only succeeds if its delegate matcher succeeds at least a specified number of times.
+ * This matcher doesn't return any result (it throws its delegate matcher's intermediary results) in order to scale
+ * to arbitrary numbers of iterations. It still supports backtracking though.
+ * If you need a version that accumulates the intermediate results but can't scale to any number of repetitions,
+ * you may want to use {@link AtLeastButFiniteMatcher}
+ */
 public class AtLeastMatcher extends StaxMatcher<Void> {
     private final StaxMatcher<?> delegate;
     private final int n;
@@ -41,6 +48,6 @@ public class AtLeastMatcher extends StaxMatcher<Void> {
 
     @Override
     public String toString() {
-        return "("+delegate+"){"+n+"| }";
+        return "(" + delegate + "){" + n + "| }";
     }
 }
