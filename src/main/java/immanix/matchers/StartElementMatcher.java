@@ -7,8 +7,8 @@ public class StartElementMatcher extends BaseEventMatcher<StartElement> {
 
     @Override
     protected boolean accept(XMLEvent e) {
-        if(!e.isStartElement()){
-            System.out.println("failed to match <");
+        if (!e.isStartElement()) {
+            //System.out.println("failed to match <");
         }
         return e.isStartElement();
     }
