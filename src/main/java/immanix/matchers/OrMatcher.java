@@ -21,10 +21,23 @@ public class OrMatcher<T> extends StaxMatcher<T> {
             throws XMLStreamException {
         MatcherResult<T> res1 = m1.match(reader);
         if (res1.isFailure()) {
-            return m2.match(res1.reader);
+            MatcherResult<T> res2 = m2.match(res1.reader);
+            if (res2.isFailure()) {
+                return MatcherResult.failure(res2.reader,
+                        toString() + " failed as both alternatives failed:\n" +
+                                "Alternative 1:\n\t" +
+                                res1.errorMessage + "\nAlternative 2:\n\t" + res2.errorMessage + "\n" +
+                                toString() + " failed due to the previous errors");
+            } else {
+                return res2;
+            }
         } else {
             return res1;
         }
     }
 
+    @Override
+    public String toString() {
+        return "(" + m1 + ") | (" + m2 + ")";
+    }
 }

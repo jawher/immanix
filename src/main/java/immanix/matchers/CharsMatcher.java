@@ -16,8 +16,13 @@ public class CharsMatcher extends BaseEventMatcher<String> {
     }
 
     @Override
+    protected String expects() {
+        return "Characters";
+    }
+
+    @Override
     public String toString() {
-        return "text";
+        return "Characters";
     }
 
 }

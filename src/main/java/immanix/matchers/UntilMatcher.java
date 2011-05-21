@@ -32,9 +32,15 @@ public class UntilMatcher<T> extends StaxMatcher<T> {
             if (reader.hasNext()) {
                 reader.next();
             } else {
-                return MatcherResult.failure(reader);
+                return MatcherResult.failure(reader, toString() + " failed: the stream was consumed without the delegate matcher '" + delegate +
+                        "' matching");
             }
         }
         return res;
+    }
+
+    @Override
+    public String toString() {
+        return "(Until " + delegate + ")";
     }
 }

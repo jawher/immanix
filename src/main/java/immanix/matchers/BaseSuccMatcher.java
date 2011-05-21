@@ -25,11 +25,13 @@ public abstract class BaseSuccMatcher<S, T, U> extends StaxMatcher<U> {
 
         MatcherResult<S> res1 = m1.match(reader);
         if (res1.isFailure()) {
-            return MatcherResult.failure(res1.reader);
+            return MatcherResult.failure(res1.reader, res1.errorMessage + "\n" + toString() +
+                    " failed due to the previous error");
         } else {
             MatcherResult<T> res2 = m2.match(res1.reader);
             if (res2.isFailure()) {
-                return MatcherResult.failure(res2.reader);
+                return MatcherResult.failure(res2.reader, res2.errorMessage + "\n" + toString() +
+                        " failed due to the previous error");
             } else {
                 List<XMLEvent> consumedEvents = new ArrayList<XMLEvent>(res1.consumedEvents);
                 consumedEvents.addAll(res2.consumedEvents);
@@ -43,6 +45,6 @@ public abstract class BaseSuccMatcher<S, T, U> extends StaxMatcher<U> {
 
     @Override
     public String toString() {
-        return "(" + m1 + ") ~ (" + m2 + ")";
+        return "(" + m1 + " ~ " + m2 + ")";
     }
 }

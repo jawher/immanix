@@ -37,7 +37,9 @@ public class AtLeastButFiniteMatcher<T> extends StaxMatcher<List<T>> {
         for (int i = 0; i < n; i++) {
             MatcherResult<T> partialRes = delegate.match(reader);
             if (partialRes.isFailure()) {
-                return MatcherResult.failure(new BacktrackEventReader(consumedEvents, partialRes.reader));
+                return MatcherResult.failure(new BacktrackEventReader(consumedEvents, partialRes.reader),
+                        partialRes.errorMessage + "\n" +
+                                toString() + " failed as its delegate matcher failed to match after " + (i + 1) + " iterations with the previous error");
             } else {
                 res.add(partialRes.data);
                 consumedEvents.addAll(partialRes.consumedEvents);
@@ -51,5 +53,10 @@ public class AtLeastButFiniteMatcher<T> extends StaxMatcher<List<T>> {
             reader = partialRes.reader;
         }
         return MatcherResult.success(res, partialRes.reader, consumedEvents);
+    }
+
+    @Override
+    public String toString() {
+        return "(AtLeastButFinite(" + n + ") " + delegate + ")";
     }
 }

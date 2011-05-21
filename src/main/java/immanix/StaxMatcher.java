@@ -132,6 +132,11 @@ public abstract class StaxMatcher<T> {
             public boolean validate(T data) {
                 return predicate.apply(data);
             }
+
+            @Override
+            public String conditionInEnglish() {
+                return predicate.toString();
+            }
         };
     }
 

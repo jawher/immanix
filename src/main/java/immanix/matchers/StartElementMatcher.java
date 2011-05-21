@@ -18,4 +18,13 @@ public class StartElementMatcher extends BaseEventMatcher<StartElement> {
         return e.asStartElement();
     }
 
+    @Override
+    protected String expects() {
+        return "Start of any element";
+    }
+
+    @Override
+    public String toString() {
+        return "Start of any element";
+    }
 }

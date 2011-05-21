@@ -15,4 +15,13 @@ public class EndElementMatcher extends BaseEventMatcher<EndElement> {
         return e.asEndElement();
     }
 
+    @Override
+    protected String expects() {
+        return "End of any element";
+    }
+
+    @Override
+    public String toString() {
+        return "End of any element";
+    }
 }

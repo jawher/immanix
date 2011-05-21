@@ -33,7 +33,9 @@ public class AtLeastMatcher extends StaxMatcher<Void> {
         for (int i = 0; i < n; i++) {
             MatcherResult<?> partialRes = delegate.match(reader);
             if (partialRes.isFailure()) {
-                return MatcherResult.failure(new BacktrackEventReader(consumedEvents, partialRes.reader));
+                return MatcherResult.failure(new BacktrackEventReader(consumedEvents, partialRes.reader),
+                        partialRes.errorMessage + "\n" +
+                                toString() + " failed as its delegate matcher failed to match after " + (i + 1) + " iterations with the previous error");
             } else {
                 consumedEvents.addAll(partialRes.consumedEvents);
                 reader = partialRes.reader;
@@ -48,6 +50,6 @@ public class AtLeastMatcher extends StaxMatcher<Void> {
 
     @Override
     public String toString() {
-        return "(" + delegate + "){" + n + "| }";
+        return "(AtLeast(" + n + ") " + delegate + ")";
     }
 }

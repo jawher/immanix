@@ -23,13 +23,19 @@ public class NTimesMatcher<T> extends StaxMatcher<List<T>> {
     public MatcherResult<List<T>> match(EventReader reader) throws XMLStreamException {
         MatcherResult<List<T>> res = new AtMostMatcher<T>(delegate, n).match(reader);
         if (res.isFailure()) {
-            return res;
+            return MatcherResult.failure(res.reader, res.errorMessage + "\n" + toString() + " failed due to the previous error");
         } else {
             if (res.data.size() < n) {
-                return MatcherResult.failure(new BacktrackEventReader(res.consumedEvents, res.reader));
+                return MatcherResult.failure(new BacktrackEventReader(res.consumedEvents, res.reader),
+                        toString() + " failed as the delegate matcher matched only " + res.data.size() + " time(s) instead of " + n);
             } else {
                 return res;
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "(Times(" + n + ") " + delegate + ")";
     }
 }

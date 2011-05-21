@@ -23,7 +23,7 @@ public class Succ3Matcher<T1, T2, T3> extends StaxMatcher<Tuple3<T1, T2, T3>> {
         MatcherResult<Tuple2<Tuple2<T1, T2>, T3>> res = m.match(reader);
 
         if (res.isFailure()) {
-            return MatcherResult.failure(res.reader);
+            return MatcherResult.failure(res.reader, res.errorMessage);
         } else {
             return MatcherResult.success(new Tuple3<T1, T2, T3>(res.data._1._1, res.data._1._2, res.data._2), res.reader, res.consumedEvents);
         }

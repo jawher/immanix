@@ -14,7 +14,7 @@ public class LeftSuccMatcher<S, T> extends BaseSuccMatcher<S, T, S> {
 
     @Override
     public String toString() {
-        return "("+m1+") <~ ("+m2+")";
+        return "(" + m1 + " <~ " + m2 + ")";
     }
 
 }

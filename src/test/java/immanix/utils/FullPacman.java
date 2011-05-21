@@ -8,18 +8,18 @@ import javax.xml.stream.XMLStreamException;
 import java.util.Collections;
 
 public class FullPacman extends StaxMatcher<Object> {
-            int count;
+    int count;
 
-            public FullPacman(int count) {
-                this.count = count;
-            }
+    public FullPacman(int count) {
+        this.count = count;
+    }
 
-            @Override
-            public MatcherResult<Object> match(EventReader reader) throws XMLStreamException {
-                if (count-- > 0) {
-                    return MatcherResult.<Object>success("S", reader, Collections.EMPTY_LIST);
-                } else {
-                    return MatcherResult.failure(reader);
-                }
-            }
+    @Override
+    public MatcherResult<Object> match(EventReader reader) throws XMLStreamException {
+        if (count-- > 0) {
+            return MatcherResult.<Object>success("S", reader, Collections.EMPTY_LIST);
+        } else {
+            return MatcherResult.failure(reader, "Pacman is full");
         }
+    }
+}

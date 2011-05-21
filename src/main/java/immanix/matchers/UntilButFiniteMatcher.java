@@ -38,11 +38,19 @@ public class UntilButFiniteMatcher<T> extends StaxMatcher<T> {
             if (reader.hasNext() && consumedEvents.size() < giveUpBarrier) {
                 consumedEvents.add(reader.next());
             } else {
-                return MatcherResult.failure(new BacktrackEventReader(consumedEvents, reader));
+                return MatcherResult.failure(new BacktrackEventReader(consumedEvents, reader),
+                        toString() + " failed: the stream was consumed without the delegate matcher '" + delegate +
+                                "' matching");
             }
 
         }
         consumedEvents.addAll(res.consumedEvents);
         return MatcherResult.success(res.data, res.reader, consumedEvents);
+    }
+
+
+    @Override
+    public String toString() {
+        return "(UntilButFinite " + delegate + ")";
     }
 }

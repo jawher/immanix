@@ -29,17 +29,21 @@ public abstract class CondMatcher<T> extends StaxMatcher<T> {
             if (validate(res.data)) {
                 return res;
             } else {
-                return MatcherResult.failure(new BacktrackEventReader(res.consumedEvents, res.reader.unwrap()));
+                return MatcherResult.failure(new BacktrackEventReader(res.consumedEvents, res.reader.unwrap()),
+                        toString() + " failed as the delegate matcher's '" + delegate.toString() +
+                                "' result didn't satisfy the condition '" + conditionInEnglish() +
+                                "'");
             }
         }
     }
 
     /**
-     *
      * @param data the delgate matcher's result
      * @return whether to accept this result or not
      */
     public abstract boolean validate(T data);
+
+    public abstract String conditionInEnglish();
 
     @Override
     public String toString() {

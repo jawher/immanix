@@ -15,8 +15,13 @@ public class EndDocumentMatcher extends BaseEventMatcher<Void> {
     }
 
     @Override
+    protected String expects() {
+        return "Document end";
+    }
+
+    @Override
     public String toString() {
-        return "EOF";
+        return "Document end";
     }
 
 }

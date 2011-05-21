@@ -9,22 +9,24 @@ public final class MatcherResult<T> {
     public final EventReader reader;
     public final List<XMLEvent> consumedEvents;
 
-    final boolean failure;
+    private final boolean failure;
+    public final String errorMessage;
 
-    private MatcherResult(T data, EventReader reader, List<XMLEvent> consumedEvents, boolean failure) {
+    private MatcherResult(T data, EventReader reader, List<XMLEvent> consumedEvents, boolean failure, String errorMessage) {
         super();
         this.data = data;
         this.reader = reader;
         this.consumedEvents = consumedEvents;
         this.failure = failure;
+        this.errorMessage = errorMessage;
     }
 
     public static <S> MatcherResult<S> success(S data, EventReader reader, List<XMLEvent> consumedEvents) {
-        return new MatcherResult<S>(data, reader, consumedEvents, false);
+        return new MatcherResult<S>(data, reader, consumedEvents, false, null);
     }
 
-    public static <S> MatcherResult<S> failure(EventReader reader) {
-        return new MatcherResult<S>(null, reader, Collections.<XMLEvent>emptyList(), true);
+    public static <S> MatcherResult<S> failure(EventReader reader, String errorMessage) {
+        return new MatcherResult<S>(null, reader, Collections.<XMLEvent>emptyList(), true, errorMessage);
     }
 
     public boolean isFailure() {

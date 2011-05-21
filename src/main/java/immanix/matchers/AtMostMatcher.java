@@ -40,7 +40,13 @@ public class AtMostMatcher<T> extends StaxMatcher<List<T>> {
             return MatcherResult.success(res, partialRes.reader, consumedEvents);
         } else {
             consumedEvents.addAll(partialRes.consumedEvents);
-            return MatcherResult.failure(new BacktrackEventReader(consumedEvents, partialRes.reader));
+            return MatcherResult.failure(new BacktrackEventReader(consumedEvents, partialRes.reader),
+                    toString() + " failed as it delegate matcher matched for " + (n + 1) + " times");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "(AtMost(" + n + ") " + delegate + ")";
     }
 }

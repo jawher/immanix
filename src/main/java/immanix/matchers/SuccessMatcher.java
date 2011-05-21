@@ -17,7 +17,7 @@ public class SuccessMatcher extends StaxMatcher<XMLEvent> {
             reader = reader.unwrap();
             return MatcherResult.success(event, reader, Arrays.asList(event));
         } else {
-            return MatcherResult.failure(reader);
+            return MatcherResult.failure(reader, toString() + " failed: unexpected end of stream");
         }
     }
 

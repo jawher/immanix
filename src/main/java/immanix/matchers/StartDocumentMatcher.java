@@ -15,8 +15,13 @@ public class StartDocumentMatcher extends BaseEventMatcher<Void> {
     }
 
     @Override
+    protected String expects() {
+        return "Document start";
+    }
+
+    @Override
     public String toString() {
-        return "SOF";
+        return "Document start";
     }
 
 }
