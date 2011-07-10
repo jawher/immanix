@@ -1,5 +1,6 @@
 package immanix.matchers;
 
+import javax.xml.namespace.QName;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
@@ -7,6 +8,7 @@ import javax.xml.stream.events.XMLEvent;
  * A matcher that only succeeds if it matches a start element event with the specified name
  */
 public class NamedStartElementMatcher extends BaseEventMatcher<StartElement> {
+    private final String namespaceURI;
     private final String name;
 
     /**
@@ -14,11 +16,26 @@ public class NamedStartElementMatcher extends BaseEventMatcher<StartElement> {
      */
     public NamedStartElementMatcher(String name) {
         this.name = name;
+        this.namespaceURI = null;
+    }
+
+    /**
+     * @param namespaceURI the start element's namespace uri
+     * @param name         the start element's name to match
+     */
+    public NamedStartElementMatcher(String namespaceURI, String name) {
+        this.name = name;
+        this.namespaceURI = namespaceURI;
     }
 
     @Override
     protected boolean accept(XMLEvent e) {
-        return e.isStartElement() && name.equals(e.asStartElement().getName().getLocalPart());
+        if (e.isStartElement()) {
+            QName qName = e.asStartElement().getName();
+            return name.equals(qName.getLocalPart()) && (namespaceURI == null || namespaceURI.equals
+                    (qName.getNamespaceURI()));
+        }
+        return false;
     }
 
     @Override
@@ -33,7 +50,7 @@ public class NamedStartElementMatcher extends BaseEventMatcher<StartElement> {
 
     @Override
     public String toString() {
-        return "<" + name + ">";
+        return "<" + (namespaceURI == null ? "" : "{" + namespaceURI + "}") + name + ">";
     }
 
 }

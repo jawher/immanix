@@ -1,5 +1,6 @@
 package immanix.matchers;
 
+import javax.xml.namespace.QName;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.XMLEvent;
 
@@ -7,6 +8,7 @@ import javax.xml.stream.events.XMLEvent;
  * A matcher that only succeeds if it matches an end element event with the specified name
  */
 public class NamedEndElementMatcher extends BaseEventMatcher<EndElement> {
+    private final String namespaceURI;
     private final String name;
 
     /**
@@ -14,11 +16,26 @@ public class NamedEndElementMatcher extends BaseEventMatcher<EndElement> {
      */
     public NamedEndElementMatcher(String name) {
         this.name = name;
+        this.namespaceURI = null;
+    }
+
+    /**
+     * @param namespaceURI the end element's namespace uri
+     * @param name         the end element's name to match
+     */
+    public NamedEndElementMatcher(String namespaceURI, String name) {
+        this.name = name;
+        this.namespaceURI = namespaceURI;
     }
 
     @Override
     protected boolean accept(XMLEvent e) {
-        return e.isEndElement() && name.equals(e.asEndElement().getName().getLocalPart());
+        if (e.isEndElement()) {
+            QName qName = e.asEndElement().getName();
+            return name.equals(qName.getLocalPart()) && (namespaceURI == null || namespaceURI.equals
+                    (qName.getNamespaceURI()));
+        }
+        return false;
     }
 
     @Override
@@ -33,7 +50,7 @@ public class NamedEndElementMatcher extends BaseEventMatcher<EndElement> {
 
     @Override
     public String toString() {
-        return "</" + name + ">";
+        return "</" + (namespaceURI == null ? "" : "{" + namespaceURI + "}") + name + ">";
     }
 
 }
