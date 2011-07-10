@@ -6,7 +6,7 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-public class M {
+public class Matchers {
     public static StartDocumentMatcher startDoc() {
         return new StartDocumentMatcher();
     }
