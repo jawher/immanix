@@ -27,12 +27,20 @@ public class M {
         return new NamedStartElementMatcher(name);
     }
 
+    public static StaxMatcher<StartElement> start(String namespaceURI, String name) {
+        return new NamedStartElementMatcher(namespaceURI, name);
+    }
+
     public static StaxMatcher<EndElement> end() {
         return new EndElementMatcher();
     }
 
     public static StaxMatcher<EndElement> end(String name) {
         return new NamedEndElementMatcher(name);
+    }
+
+    public static StaxMatcher<EndElement> end(String namespaceURI, String name) {
+        return new NamedEndElementMatcher(namespaceURI, name);
     }
 
     public static StaxMatcher<XMLEvent> success() {
