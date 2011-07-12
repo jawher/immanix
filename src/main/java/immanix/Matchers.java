@@ -54,4 +54,44 @@ public class Matchers {
     public static <T> StaxMatcher<T> untilButFinite(StaxMatcher<T> m, int giveUpBarrier) {
         return new UntilButFiniteMatcher<T>(m, giveUpBarrier);
     }
+
+    /**
+     * Augments a matcher so that it accepts characters (whitespace generally) before it
+     *
+     * @param m   the matcher to wrap
+     * @param <T> the result type of the matcher to wrap
+     * @return the augmented matcher
+     */
+    public static <T> StaxMatcher<T> wsl(StaxMatcher<T> m) {
+        return WS_MATCHER.thenr(m);
+    }
+
+    /**
+     * Augments a matcher so that it accepts characters (whitespace generally) after it
+     *
+     * @param m   the matcher to wrap
+     * @param <T> the result type of the matcher to wrap
+     * @return the augmented matcher
+     */
+    public static <T> StaxMatcher<T> wsr(StaxMatcher<T> m) {
+        return m.thenl(WS_MATCHER);
+    }
+
+    /**
+     * Augments a matcher so that it accepts characters (whitespace generally) before and after it
+     *
+     * @param m   the matcher to wrap
+     * @param <T> the result type of the matcher to wrap
+     * @return the augmented matcher
+     */
+    public static <T> StaxMatcher<T> ws(StaxMatcher<T> m) {
+        return WS_MATCHER.thenr(m).thenl(WS_MATCHER);
+    }
+
+    private static final StaxMatcher<String> WS_MATCHER = new CharsMatcher() {
+        @Override
+        public String toString() {
+            return " ";
+        }
+    }.optional();
 }
