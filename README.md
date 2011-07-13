@@ -4,6 +4,11 @@ Immanix
 A Java library for processing (large) xml files using parser combinators-like approach.
 Please see below for a more detailed explanation on how to use Immanix.
 
+Introduction
+------------
+
+[Introducing Immanix: a Java library to process XML using parser combinators](http://jawher.net/2011/02/28/introducing-immanix-java-library-process-xml-using-parser-combinators/)
+
 Using this library
 ------------------
 
