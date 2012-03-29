@@ -217,7 +217,7 @@ To use this library in your projects, add the following to the `dependencies` se
 `pom.xml`:
 
     <dependency>
-      <groupId>immanix</groupId>
+      <groupId>jawher</groupId>
       <artifactId>immanix</artifactId>
       <version>0.9-SNAPSHOT</version>
     </dependency>
