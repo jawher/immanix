@@ -9,8 +9,7 @@
 
     <name>immanix</name>
     <url>https://github.com/jawher/immanix</url>
-    <description>A jQuery-like HTML templating library written in Java
-    </description>
+    <description>A Java library for processing (large) xml files using parser combinators-like approach</description>
 
     <issueManagement>
         <system>github</system>
