@@ -1,6 +1,3 @@
-*.class
 target/*
-xradar
-*~
-
-
+.idea/
+immanix.iml
