@@ -10,7 +10,7 @@
 
     <groupId>com.plecting</groupId>
     <artifactId>immanix</artifactId>
-    <version>0.9-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>immanix</name>
