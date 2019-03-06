@@ -43,7 +43,7 @@ Given an xml file that looks like the following:
 ```
 
 Where the <entry> element can appear any number of times, and the <extra> element is optional (may be present or not), a
-parser able to process this xml can be assembled by combining simple and elemetary parsers.
+parser able to process this xml can be assembled by combining simple and elementary parsers.
 
 We're going to start by matching the <value> element, which in StAX language can be thought of as a sequence of 3 events: element start, characters and element end.
 
