@@ -1,0 +1,12 @@
+<root>
+    <entry>
+        <value>A value</value>
+    </entry>
+    <entry>
+        <value>Another value</value>
+        <extra>Some extra stuff</extra>
+    </entry>
+    <entry>
+        <value>3rd value</value>
+    </entry>
+</root>
